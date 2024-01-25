@@ -1,10 +1,11 @@
 import './App.css';
+import {PromptFlow} from "./Components/promptFlowTriger"
 
 function App() {
   return (
     <div className="App">
      <h1> Hello custom chat Bot  </h1>
-   <MyComponent></MyComponent>
+   <PromptFlow></PromptFlow>
     </div>
   );
 }

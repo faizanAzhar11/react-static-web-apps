@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const MyComponent = () => {
+export const PromptFlow = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,6 +15,8 @@ const MyComponent = () => {
         }
 
         const result = await response.json();
+        debugger
+        console.log("this is result"+ result)
         setData(result);
       } catch (error) {
         setError(error);
@@ -51,4 +53,4 @@ const ErrorComponent = ({ error }) => (
   </div>
 );
 
-export default MyComponent;
+
