@@ -15,8 +15,8 @@ export const PromptFlow = () => {
         }
 
         const result = await response.json();
-        debugger
-        console.log("this is result"+ result)
+        debugger;
+        console.log("this is result"+ result);
         setData(result);
       } catch (error) {
         setError(error);
