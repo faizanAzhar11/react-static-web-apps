@@ -13,9 +13,9 @@ export const PromptFlow = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-
-        const result = await response.json();
         debugger;
+        const result = await response.json();
+        
         console.log("this is result"+ result);
         setData(result);
       } catch (error) {
