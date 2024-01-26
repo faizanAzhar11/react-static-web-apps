@@ -13,7 +13,7 @@
 // }
 
 
-module.exports = async function (context, req) {
+
 
 // Request data goes here
 // The example below assumes JSON formatting which may be updated
@@ -63,8 +63,70 @@ module.exports = async function (context, req) {
 // 	});
 
 
+module.exports = async function (context, req) {
+    const url = "https://tek-copilot1-pdtar.eastus.inference.ml.azure.com/score";
 
-    context.res.json({
-        text: " api failed "
-    });
+    const bearerToken ="a7JKX2H72ivds0OHVulvstQtOWkfdVFE"; // Replace with your actual bearer token
+
+const headers = {
+  "Content-Type": "application/json",
+  "Authorization": `Bearer ${bearerToken}`
 };
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers:headers,
+            body  : JSON.stringify({    "topic": "atom"  }),    
+        });
+
+        if (!response.ok) {
+            throw new Error('HTTP error ' + response.status);
+        }
+
+        const data = await response.json();
+
+        context.res = {
+            status: 200,
+            body: data,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+    } catch (error) {
+        context.res = {
+            status: 500,
+            body: `Error: ${error.message}`,
+        };
+    }
+};
+
+// module.exports = async function (context, req) {
+
+// const jsonPlaceholderUrl = 'https://jsonplaceholder.typicode.com/posts/1';
+
+// return fetch(jsonPlaceholderUrl, {
+//   method: 'GET',
+//   headers: {
+//     'Content-Type': 'application/json',
+
+//   },
+
+// })
+//   .then(response => {
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! Status: ${response.status}`);
+//     }
+//     context.res.json({
+//         text: "FROM AZURE FUNCTION  "+JSON.stringify(response.json()) 
+//     });
+//   })
+//   .catch(error => {
+//     console.error('Error during fetch:', error);
+//     context.res.json({
+//         text: "THIS IS ERROR "
+//     });
+//     throw error; // Propagate the error to the caller
+//   });
+
+// };

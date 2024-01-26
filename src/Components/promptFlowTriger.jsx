@@ -6,6 +6,7 @@ export const PromptFlow = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    debugger
     const fetchData = async () => {
       try {
         const response = await fetch('api/TriggerPromptflow');
@@ -17,7 +18,7 @@ export const PromptFlow = () => {
         const result = await response.json();
         
         console.log("this is result"+ result);
-        setData(result);
+        setData(result.joke);
       } catch (error) {
         setError(error);
       } finally {
