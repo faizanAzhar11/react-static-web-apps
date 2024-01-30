@@ -74,10 +74,16 @@ const headers = {
 };
 
     try {
+
+// ADD CHECK IF req.query.name is null or not
+// if null then throw error
+// else continue
+const topic = (req.query.name || (req.body && req.body.name));
+
         const response = await fetch(url, {
             method: "POST",
             headers:headers,
-            body  : JSON.stringify({    "topic": "atom"  }),    
+            body  :topic =! null?topic:  JSON.stringify({    "topic": "atom"  }),    
         });
 
         if (!response.ok) {

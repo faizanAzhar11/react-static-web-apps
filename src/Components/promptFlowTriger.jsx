@@ -1,16 +1,54 @@
 import React, { useState, useEffect } from 'react';
 
 export const PromptFlow = () => {
-  const [data, setData] = useState(null);
+  const [Joke, callJoke] = useState(false);
+  const [firstRender, callFirstRender] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [inputValue, setInputValue] = useState('');
+  const [textAreaValue, setTextAreaValue] = useState('');
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+
+
+  const handleUpload = async () => {
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const blob = new Blob([reader.result], { type: file.type });
+      // Now you have the file stored as a Blob
+      console.log(blob);
+    };
+    reader.readAsArrayBuffer(file);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    callJoke(!Joke);
+    // Handle submit logic here
+  };
 
   useEffect(() => {
-    debugger
+  //  debugger
     const fetchData = async () => {
       try {
-        const response = await fetch('api/TriggerPromptflow');
-        
+      //  debugger
+        if (!firstRender) {
+       
+       
+        const response = await fetch('api/TriggerPromptflow', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ topic: inputValue }) // inputValue is the state variable holding the topic
+        });
+     //   debugger
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -18,8 +56,12 @@ export const PromptFlow = () => {
         const result = await response.json();
         
         console.log("this is result"+ result);
-        setData(result.joke);
+        // callJoke(result);
+        setTextAreaValue(JSON.stringify(result, null, 2))
+        callFirstRender(true);
+      }
       } catch (error) {
+      //  debugger
         setError(error);
       } finally {
         setLoading(false);
@@ -27,21 +69,82 @@ export const PromptFlow = () => {
     };
 
     fetchData();
-  }, []); // Empty dependency array means this effect will run once, similar to componentDidMount
+  }, [Joke]); // Empty dependency array means this effect will run once, similar to componentDidMount
 
   if (loading) {
     return <LoadingSpinner />;
   }
 
-  if (error) {
-    return <ErrorComponent error={error} />;
-  }
+  // if (error) {
+  //   return <ErrorComponent error={error} />;
+  // }
 
   return (
-    <div>
-      <h1>API Data:</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
+//     <>
+
+// <form onSubmit={handleSubmit}>
+//         <div>
+//         <h5>Get The Joke :</h5>
+//       <input
+//         type="text"
+//         value={inputValue}
+//         onChange={e => setInputValue(e.target.value)}
+//       />
+//       <button type="submit">Submit</button>
+//       <textarea
+//         value={textAreaValue}
+//         onChange={e => setTextAreaValue(e.target.value)}
+//         rows="10"
+//         cols="50"
+//       />
+//       </div>
+//     </form>
+//     <div>
+   
+// <h1>this code for file upload </h1>
+// <div>
+//       <input type="file" onChange={handleFileChange} />
+//       <button onClick={handleUpload}>Upload</button>
+//     </div>
+     
+ 
+   
+//     </div>
+//     </>
+<>
+<form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '40vh' }}>
+  <h5>Get The Joke :</h5>
+  <div style={{ display: 'flex', marginBottom: '10px', alignItems: 'center' }}>
+    <input
+      type="text"
+      value={inputValue}
+      onChange={e => setInputValue(e.target.value)}
+      placeholder="Enter topic to get joke"
+      style={{ marginRight: '10px' }}
+    />
+    <button type="submit">Submit</button>
+  </div>
+  <textarea
+    value={textAreaValue}
+    onChange={e => setTextAreaValue(e.target.value)}
+    rows="10"
+    cols="50"
+  />
+</form>
+<div style={{ display: 'flex', flexDirection: 'column',  alignItems: 'center', justifyContent: 'center', }}>
+  <h1>This code for file upload</h1>
+  <div style={{ display: 'flex', paddingLeft: '10px' , marginBottom: '10px', }}>
+    <input type="file" onChange={handleFileChange} />
+    <button onClick={handleUpload}>Upload</button>
+  </div>
+  <textarea
+    value={textAreaValue}
+    onChange={e => setTextAreaValue(e.target.value)}
+    rows="10"
+    cols="50"
+  />
+</div>
+</>
   );
 };
 
