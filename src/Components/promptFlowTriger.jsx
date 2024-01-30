@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 export const PromptFlow = () => {
   const [Joke, callJoke] = useState(false);
   const [firstRender, callFirstRender] = useState(false);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [inputValue, setInputValue] = useState('');
   const [textAreaValue, setTextAreaValue] = useState('');
@@ -62,7 +62,7 @@ export const PromptFlow = () => {
       }
       } catch (error) {
       //  debugger
-        setError(error);
+      //  setError(error);
       } finally {
         setLoading(false);
       }
