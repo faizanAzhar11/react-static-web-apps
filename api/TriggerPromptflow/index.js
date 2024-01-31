@@ -79,12 +79,12 @@ const headers = {
 // if null then throw error
 // else continue
 //const topic = (req.query.name || (req.body && req.body.name));
-const {topic} =  context.req.body;
+//const {topic} =  context.req.body;
 debugger
         const response = await fetch(url, {
             method: "POST",
             headers:headers,
-            body  : JSON.stringify({    "topic": topic  }),    
+            body  : JSON.stringify({    "topic": "book"  }),    
         });
 
         if (!response.ok) {
