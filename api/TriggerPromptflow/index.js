@@ -78,21 +78,26 @@ const headers = {
 // ADD CHECK IF req.query.name is null or not
 // if null then throw error
 // else continue
-const topic = (req.query.name || (req.body && req.body.name));
-
+//const topic = (req.query.name || (req.body && req.body.name));
+const {topic} = req.body;
+debugger
         const response = await fetch(url, {
             method: "POST",
             headers:headers,
-            body  :topic =! null?topic:  JSON.stringify({    "topic": "atom"  }),    
+            body  : JSON.stringify({    "topic": topic  }),    
         });
 
         if (!response.ok) {
             throw new Error('HTTP error ' + response.status);
         }
+debugger
+const data = await response.json();
+const joke = data.joke;
+console.log(joke);
+ 
 
-        const data = await response.json();
 
-        context.res = {
+               context.res = {
             status: 200,
             body: data,
             headers: {

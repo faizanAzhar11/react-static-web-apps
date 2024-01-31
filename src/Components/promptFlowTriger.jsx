@@ -30,6 +30,7 @@ export const PromptFlow = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    callFirstRender(true)
     callJoke(!Joke);
     // Handle submit logic here
   };
@@ -38,10 +39,10 @@ export const PromptFlow = () => {
   //  debugger
     const fetchData = async () => {
       try {
-      //  debugger
-        if (!firstRender) {
+      
+        if (firstRender) {
        
-       
+       debugger
         const response = await fetch('api/TriggerPromptflow', {
           method: 'POST',
           headers: {
@@ -58,7 +59,7 @@ export const PromptFlow = () => {
         
         console.log("this is result"+ result);
         // callJoke(result);
-        setTextAreaValue(JSON.stringify(result, null, 2))
+        setTextAreaValue(result.joke)
         callFirstRender(true);
       }
       } catch (error) {
@@ -139,8 +140,8 @@ export const PromptFlow = () => {
     <button onClick={handleUpload}>Upload</button>
   </div>
   <textarea
-    value={textAreaValue}
-    onChange={e => setTextAreaValue(e.target.value)}
+    value={""}
+   // onChange={e => setTextAreaValue(e.target.value)}
     rows="10"
     cols="50"
   />
