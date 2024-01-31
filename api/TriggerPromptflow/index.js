@@ -62,7 +62,13 @@
 // 		console.error(error)
 // 	});
 
+const fetch = require('node-fetch');
 
+module.exports = async function (context, req) {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    // rest of your code
+}
 module.exports = async function (context, req) {
     const url = "https://tek-copilot1-pdtar.eastus.inference.ml.azure.com/score";
 
