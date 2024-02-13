@@ -82,37 +82,7 @@ export const PromptFlow = () => {
   // }
 
   return (
-//     <>
 
-// <form onSubmit={handleSubmit}>
-//         <div>
-//         <h5>Get The Joke :</h5>
-//       <input
-//         type="text"
-//         value={inputValue}
-//         onChange={e => setInputValue(e.target.value)}
-//       />
-//       <button type="submit">Submit</button>
-//       <textarea
-//         value={textAreaValue}
-//         onChange={e => setTextAreaValue(e.target.value)}
-//         rows="10"
-//         cols="50"
-//       />
-//       </div>
-//     </form>
-//     <div>
-   
-// <h1>this code for file upload </h1>
-// <div>
-//       <input type="file" onChange={handleFileChange} />
-//       <button onClick={handleUpload}>Upload</button>
-//     </div>
-     
- 
-   
-//     </div>
-//     </>
 <>
 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '40vh' }}>
   <h5>Get The Joke :</h5>
