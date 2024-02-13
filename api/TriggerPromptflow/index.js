@@ -11,13 +11,13 @@ const headers = {
 
     try {
 
-const {topic} =  context.req.body;
+//const {topic} =  context.req.body;
 debugger
 var body = JSON.stringify({ "topic": topic });  
         const response = await fetch(url, {
             method: "POST",
             headers:headers,
-            body  : JSON.stringify({    "topic": topic  }),    
+            body  : JSON.stringify({    "topic": "BOOK"  }),    
         });
 
         if (!response.ok) {
