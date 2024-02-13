@@ -13,7 +13,7 @@ const headers = {
 
 //const {topic} =  context.req.body;
 debugger
-var body = JSON.stringify({ "topic": topic });  
+// var body = JSON.stringify({ "topic": topic });  
         const response = await fetch(url, {
             method: "POST",
             headers:headers,
