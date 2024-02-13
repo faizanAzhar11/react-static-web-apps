@@ -1,5 +1,7 @@
+import fetch from 'node-fetch';
 
-module.exports = async function (context, req) {
+
+export default async function (context, req) {
     const url = "https://tek-copilot1-pdtar.eastus.inference.ml.azure.com/score";
 
     const bearerToken ="a7JKX2H72ivds0OHVulvstQtOWkfdVFE"; // Replace with your actual bearer token
