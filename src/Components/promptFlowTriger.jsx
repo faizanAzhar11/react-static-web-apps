@@ -32,11 +32,11 @@ export const PromptFlow = () => {
     event.preventDefault();
     callFirstRender(true)
     callJoke(!Joke);
-    // Handle submit logic here
+ 
   };
 
   useEffect(() => {
-  //  debugger
+
     const fetchData = async () => {
       try {
       
@@ -134,7 +134,7 @@ export const PromptFlow = () => {
   />
 </form>
 <div style={{ display: 'flex', flexDirection: 'column',  alignItems: 'center', justifyContent: 'center', }}>
-  <h1>This code for file upload</h1>
+  <h1>Code for file upload</h1>
   <div style={{ display: 'flex', paddingLeft: '10px' , marginBottom: '10px', }}>
     <input type="file" onChange={handleFileChange} />
     <button onClick={handleUpload}>Upload</button>
