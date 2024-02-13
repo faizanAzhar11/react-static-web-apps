@@ -48,7 +48,7 @@ export const PromptFlow = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ topic: inputValue }) // inputValue is the state variable holding the topic
+          body: JSON.stringify({ "topic": inputValue }) // inputValue is the state variable holding the topic
         });
      //   debugger
         if (!response.ok) {
